@@ -5,13 +5,14 @@ function switchState(state) {
 
 var ids = [];
 var profiles = [];
-var serviceUrl = "http://localhost:8080/AIPOS_LAB_4/rest/StudentsBook";
+var serviceUrl = "http://localhost:8080/students-book-jersey-service/rest/StudentsBook";
 var lastSelectedRow;
 var mode;
+var token;
 
 function refreshTable() {
     $.get({
-        url: serviceUrl,
+        url: serviceUrl + "?token=" + token,
         dataType: "json",
         success: function (xhr, status) {
             ids = [];
@@ -73,7 +74,7 @@ $(function () {
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: serviceUrl,
+                    url: serviceUrl + '?token=' + token,
                     data: JSON.stringify(formObject),
                     success: function (data, textStatus, jqXHR) {
                         refreshTable();
@@ -88,7 +89,7 @@ $(function () {
                 $.ajax({
                     type: 'PUT',
                     contentType: 'application/json',
-                    url: serviceUrl,
+                    url: serviceUrl + '?token=' + token,
                     data: JSON.stringify(formObject),
                     success: function (data, textStatus, jqXHR) {
                         refreshTable();
@@ -128,7 +129,7 @@ $(function () {
         if ($('.selected').length > 0) {
             $.ajax({
                 type: "DELETE",
-                url: serviceUrl + "/" + ids[lastSelectedRow - 1],
+                url: serviceUrl + "/" + ids[lastSelectedRow - 1] + '?token=' + token,
                 success: function (data, textStatus, jqXHR) {
                     refreshTable();
                 },
@@ -145,9 +146,12 @@ function populate(frm, data) {
     });
 }
 
-$(document).ready(function () {
-    refreshTable();
-});
+//$(document).ready(function () {
+//    if (token != undefined){
+//        document.getElementById('login-block').style.display = 'none';
+//            document.getElementById('manage-block').style.display = 'block';
+//    }
+//});
 
 $(document).ajaxComplete(function () {
     $("tr").click(function () {
@@ -160,8 +164,11 @@ $(document).ajaxComplete(function () {
 $(function () {
     $('#vk-image').click(function (e) {
         hello('vk').login().then(function () {
-            alert('Signed in vk');
-            window.open('http://localhost/StudentsBook/manage-page.html', "_self");
+            var vk = hello('vk').getAuthResponse();
+            token = vk.access_token;
+            document.getElementById('login-block').style.display = 'none';
+            document.getElementById('manage-block').style.display = 'block';
+            refreshTable();
         }, function (e) {
             alert('Signin error: ' + e.error.message);
         });
@@ -171,8 +178,11 @@ $(function () {
 $(function () {
     $('#facebook-image').click(function (e) {
         hello('facebook').login().then(function () {
-            alert('Signed in facebook');
-            window.open('http://localhost/StudentsBook/manage-page.html', "_self");
+            var fb = hello('facebook').getAuthResponse();
+            token = fb.access_token;
+            document.getElementById('login-block').style.display = 'none';
+            document.getElementById('manage-block').style.display = 'block';
+            refreshTable();
         }, function (e) {
             alert('Signin error: ' + e.error.message);
         });
@@ -188,15 +198,3 @@ var online = function (session) {
     var currentTime = (new Date()).getTime() / 1000;
     return session && session.access_token && session.expires > currentTime;
 };
-
-//hello.on('auth.login', function (auth) {
-//    var fb = hello('facebook').getAuthResponse();
-//    var vk = hello('vk').getAuthResponse();
-//    console.log(online(fb));
-//    //console.log(online(vk));
-//    console.log(fb);
-//    //console.log(vk);
-//    if (online(fb)) {
-//        window.open('http://localhost/StudentsBook/manage-page.html', "_self");
-//    }
-//});
