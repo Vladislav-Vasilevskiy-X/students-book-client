@@ -1,8 +1,3 @@
-function switchState(state) {
-    document.getElementById('student-profile-form').style.display = state;
-    document.getElementById('wrap').style.display = state;
-}
-
 var ids = [];
 var profiles = [];
 var serviceUrl = "http://localhost:8080/students-book-jersey-service/rest/StudentsBook";
@@ -18,7 +13,7 @@ function refreshTable() {
             ids = [];
             profiles = xhr;
             var out = "<thead>" +
-                            '<tr class="w3-green">' +
+                            '<tr>' +
                                 '<th>Name</th>' +
                                 '<th>Age</th>' +
                                 '<th>Speciality</th>' +
@@ -109,7 +104,6 @@ $(function () {
 $(function () {
     $('#add-btn').click(function (e) {
         document.getElementById("form-content").reset();
-        switchState('block');
         mode = 'add';
     });
 });
@@ -117,7 +111,6 @@ $(function () {
 $(function () {
     $('#edit-btn').click(function (e) {
         if ($('.selected').length > 0) {
-            switchState('block');
             mode = 'edit';
             populate('#form-content', profiles[lastSelectedRow - 1]);
         }
@@ -146,13 +139,6 @@ function populate(frm, data) {
     });
 }
 
-//$(document).ready(function () {
-//    if (token != undefined){
-//        document.getElementById('login-block').style.display = 'none';
-//            document.getElementById('manage-block').style.display = 'block';
-//    }
-//});
-
 $(document).ajaxComplete(function () {
     $("tr").click(function () {
         $(this).closest("tr").siblings().removeClass("selected");
@@ -167,6 +153,7 @@ $(function () {
             var vk = hello('vk').getAuthResponse();
             token = vk.access_token;
             document.getElementById('login-block').style.display = 'none';
+            $("#login-ul").prop("disabled", true);
             document.getElementById('manage-block').style.display = 'block';
             refreshTable();
         }, function (e) {
@@ -181,6 +168,7 @@ $(function () {
             var fb = hello('facebook').getAuthResponse();
             token = fb.access_token;
             document.getElementById('login-block').style.display = 'none';
+            $("#login-ul").prop("disabled", true);
             document.getElementById('manage-block').style.display = 'block';
             refreshTable();
         }, function (e) {

@@ -1,13 +1,39 @@
-html, body, [data-role=page] {
+/*html, body, [data-role=page] {
     min-height: 100% !important;
     height: 100%;
+}*/
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
 }
 
-[data-role=footer] {
-    bottom: 0;
-    position: absolute !important;
-    top: auto !important;
-    width: 100%;
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
 }
 
 #table-scroll {
@@ -50,38 +76,13 @@ html, body, [data-role=page] {
     cursor: pointer;
 }
 
-.w3-striped tbody tr.selected:nth-child(even) {
+.table-hover tbody tr.selected:nth-child(even) {
     background-color: #cbfcc9;
 }
 
-.w3-striped tbody tr.selected:nth-child(odd) {
+.table-hover tbody tr.selected:nth-child(odd) {
     background-color: #cbfcc9;
 }
-
-body {
-    background: url(../images/background.jpg) no-repeat center center fixed;
-    -webkit-background-size: inherit;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-/*div.info-block {
-    background-color: rgba(192,192,192, 0.61);
-    border-radius: 5px;
-    margin: 50px auto;
-    text-align: center;
-    padding: 15px;
-    font-size: 25px;
-}
-
-div#login-block {
-    width: 10%;
-}
-
-div#welcome-message {
-    width: 50%;
-}*/
 
 img.button-image {
     border-radius: 10px;

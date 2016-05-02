@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Students Book</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+        <!--<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">-->
+        <link rel="stylesheet" href="styles/StyleSheet.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="icon" type="image/png" href="images/book-icon.png" sizes="32x32">
+        <script src="js/jquery-2.2.3.min.js"></script>
+        <script src="js/hello.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Students Book</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                    <ul id="login-ul" class="nav navbar-nav navbar-right" data-toggle="modal" data-target="#login-modal">
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Begin page content -->
+        <div class="container">
+            <div id="login-block">
+                <div class="page-header">
+                    <h1>Students Book v1.0</h1>
+                </div>
+                <p class="lead">If you want to continue you should have a Facebook or VKontakte account. If you don't, please register and come back</p>
+
+            </div>
+
+            <div id="manage-block" class="container" style="display: none">
+                <div id="toolbar">
+                    <button id="add-btn" class="btn btn-default" data-toggle="modal" data-target="#form-modal">Add</button>
+                    <button id="edit-btn" class="btn btn-default" data-toggle="modal" data-target="#form-modal">Edit</button>
+                    <button id="delete-btn" class="btn btn-default">Delete</button>
+                </div>
+                <br />
+                <div id="table-scroll">
+                    <table id="profiles-table" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Speciality</th>
+                            <th>Course</th>
+                            <th>Faculty</th>
+                            <th>University</th>
+                            <th>Average mark</th>
+                            <th>Description</th>
+                        </tr>
+                            </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+
+                <div id="form-modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Student Profile</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form" id="form-content">
+                                    <input name="name" class="form-control" placeholder="Name" maxlength="50" required="required" title="Name" />
+                                    <input type="number" class="form-control" name="age" min="1" max="100" placeholder="Age" required="required" title="Age" />
+                                    <input name="speciality" class="form-control" placeholder="Speciality" required="required" title="Speciality" />
+                                    <input type="number" class="form-control" name="course" min="1" max="6" placeholder="Course" required="required" title="Course" />
+                                    <input name="faculty" class="form-control" placeholder="Faculty" title="Faculty" />
+                                    <input name="university" class="form-control" placeholder="University" required="required" title="University" />
+                                    <input type="number" class="form-control" min="1" max="10" step="any" name="averageValue" placeholder="Average mark" required="required" title="Average mark" />
+                                    <input name="description" class="form-control" placeholder="Description" required="required" title="Description" /><br />
+                                    <button type="submit" class="btn btn-default" id="submit-btn">Save</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">Authors: Anastassia Vasilets & Vladislav Parhutich.</p>
+            </div>
+        </footer>
+        </div>
+        <div id="login-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Log In</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img id="vk-image" class="button-image" src="images/vk-icon.png" alt="Image was not loaded">
+                        <img id="facebook-image" class="button-image" src="images/facebook-icon.png" alt="Image was not loaded">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="js/script.js"></script>
+    </body>
+</html>
